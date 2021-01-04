@@ -53,11 +53,11 @@ st.sidebar.title('Interactive control sidebar')
 st.sidebar.subheader('View of data for selected month')
 
 # Graph 1: labour costs in S$ and Hr by Project/Functional Group
-selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
+selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key=None)
 if selectYr == '2019':
-    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='1')
+    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key=None)
 else: 
-    selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
+    selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
 
 # Test set to see if ploty works
 selectGraph = data
