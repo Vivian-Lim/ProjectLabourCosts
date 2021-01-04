@@ -52,6 +52,19 @@ st.sidebar.title('Interactive control sidebar')
 st.sidebar.subheader('View of data for selected month')
 
 
+def get_data():
+    url = "./data.csv"
+    return pd.read_csv(url)
+dfee = get_data()
+minimum = st.sidebar.number_input("Minimum", min_value=2019)
+maximum = st.sidebar.number_input("Maximum", min_value=2019, value=2020)
+if minimum > maximum:
+    st.error("Please enter a valid range")
+else:
+    abcd = dfee.query("@minimum<=YEAR<=@maximum")
+    abcd
+
+
 
 selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
 if selectYr == '2019':
