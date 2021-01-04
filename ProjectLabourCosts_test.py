@@ -36,6 +36,7 @@ def load_data():
     data = pd.read_csv(DATA_URL)
     return data
 data = load_data()
+data
 
 # Setting up streamlit by giving titles and description
 st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
