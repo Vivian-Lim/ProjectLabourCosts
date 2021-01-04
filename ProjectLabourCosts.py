@@ -15,7 +15,7 @@ input = pd.read_csv('./tsInput.csv')
 ref1 = pd.read_csv('./project_Ls.csv')
 ref2 = pd.read_csv('./staff_Lvl_Gp.csv')
 ref3 = pd.read_csv('./salary_Lvl.csv')
-data = pd.read_csv('./data.csv')
+data = './data.csv'
 
 # Merging master-input file with reference-file
 input_ref1 = pd.merge(input, ref1, on='PROJECT', how='left')
@@ -36,7 +36,6 @@ def load_data():
     data = pd.read_csv(DATA_URL)
     return data
 data = load_data()
-data
 
 # Setting up streamlit by giving titles and description
 st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
@@ -53,14 +52,14 @@ st.sidebar.title('Interactive control sidebar')
 st.sidebar.subheader('View of data for selected month')
 
 # Graph 1: labour costs in S$ and Hr by Project/Functional Group
-selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
-if selectYr == '2019':
-    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='1')
+selectYr = st.sidebar.selectbox('Year', [2019, 2020], key='1')
+if selectYr == int('2019'):
+    selectMth = st.sidebar.selectbox('Month', [8, 9, 10, 11, 12], key='2')
 else: 
-    selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
+    selectMth = st.sidebar.selectbox('Month', [1, 2, 3, 4, 5], key='3')
 
 selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
-select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
+select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='4')
 if select == 'Functional Group':
     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
     trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
@@ -73,7 +72,7 @@ if select == 'Functional Group':
     selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
-   
+
     selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
@@ -89,7 +88,7 @@ else:
     selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
-   
+
     selectGraph2 = px.bar(selectGraph, x='HOUR', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
