@@ -57,6 +57,7 @@ selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
 if selectYr == '2019':
     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='1')
     selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+    selectGraph
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
     selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
