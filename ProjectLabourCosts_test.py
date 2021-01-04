@@ -31,7 +31,7 @@ import warnings
 
 # Load the processed output data into streamlit as data source
 DATA_URL = ("./data.csv")
-@st.cache(ignore_hash=True)
+@st.cache
 def load_data():
     data = pd.read_csv(DATA_URL)
     return data
