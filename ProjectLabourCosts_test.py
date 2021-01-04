@@ -81,7 +81,7 @@ test1
 # Original code do not delete
 # selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
 # selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
-selectGraph = data.query('YEAR == @selectYr') 
+selectGraph = data.query("YEAR == @selectYr") 
 selectGraph
 
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
