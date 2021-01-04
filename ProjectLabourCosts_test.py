@@ -72,12 +72,14 @@ if select == 'Functional Group':
 # The above shown on streamlit deploying; so is the data.query does not works
 
 # Then test data query and it works with specified number
-test1 = data.query('(YEAR == 2020) & (MONTH == 5)')
+test1 = data.query('(YEAR == 2020) & (MONTH == 1)')
 test1
 
 # Original code do not delete
-selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+# selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
 selectGraph
+
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
 if select == 'Functional Group':
     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
