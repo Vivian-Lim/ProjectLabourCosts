@@ -59,6 +59,7 @@ else:
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
 
 selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+selectGraph
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
 if select == 'Functional Group':
     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
