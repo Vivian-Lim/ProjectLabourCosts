@@ -59,6 +59,18 @@ if selectYr == '2019':
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
 
+# Test set to see if ploty works
+selectGraph = data
+select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
+if select == 'Functional Group':
+    trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
+    trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
+    dataTrace = [trace0, trace1]
+    layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
+    fig = go.Figure(data=dataTrace, layout=layoutTrace)
+    st.plotly_chart(fig)
+
+# Original code do not delete
 selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
 selectGraph
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
