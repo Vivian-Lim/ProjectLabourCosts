@@ -77,50 +77,79 @@ else:
 
 
 
-# selectYr = st.sidebar.selectbox('Year', ['2019', '5020'], key='1')
-# if selectYr == int('2019'):
-#     selectMth = st.sidebar.selectbox('Month', [8, 9, 10, 11, 12], key='1')
-#     selectGraph = data.query('(YEAR==@selectYr) & (MONTH==@selectMth)') 
-#     selectGraph
-# else: 
-#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
-#     selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
-
-# select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
-# if select == 'Functional Group':
-#     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
-#     trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
-#     dataTrace = [trace0, trace1]
-#     layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
-#     fig = go.Figure(data=dataTrace, layout=layoutTrace)
-#     st.plotly_chart(fig)
-    
-#     # Graph 2b: Ranking of labour cost for project/Functional Group by S$ & Hr
-#     selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
-#     selectGraph2.update_yaxes(categoryorder='sum ascending')
-#     st.plotly_chart(selectGraph2)
-
-#     selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
-#     selectGraph2.update_yaxes(categoryorder='sum ascending')
-#     st.plotly_chart(selectGraph2)
-# else:
-#     trace0 = go.Bar(x=[selectGraph["FIELD"],selectGraph["PROJECT"]], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
-#     trace1 = go.Bar(x=[selectGraph["FIELD"],selectGraph["PROJECT"]], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
-#     dataTrace = [trace0, trace1]
-#     layoutTrace={'xaxis': {'title': 'Project'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
-#     fig = go.Figure(data=dataTrace, layout=layoutTrace)
-#     st.plotly_chart(fig)
-
-
-
 # Graph 1: labour costs in S$ and Hr by Project/Functional Group
-# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key=None)
-# if selectYr == '2019':
-#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key=None)
-# else: 
-#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
+selectYr = st.sidebar.selectbox('Year', [2019, 2020])
+if selectYr == int('2019'):
+    selectMth = st.sidebar.selectbox('Month', [8, 9, 10, 11, 12], key='2')
+else: 
+    selectMth = st.sidebar.selectbox('Month', [1, 2, 3, 4, 5], key='3')
 
-# selectYr = '2020'
+selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'])
+if select == 'Functional Group':
+    trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
+    trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
+    dataTrace = [trace0, trace1]
+    layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
+    fig = go.Figure(data=dataTrace, layout=layoutTrace)
+    st.plotly_chart(fig)
+    
+    # Graph 2b: Ranking of labour cost for project/Functional Group by S$ & Hr
+    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
+    selectGraph2.update_yaxes(categoryorder='sum ascending')
+    st.plotly_chart(selectGraph2)
+
+    selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
+    selectGraph2.update_yaxes(categoryorder='sum ascending')
+    st.plotly_chart(selectGraph2)
+else:
+    trace0 = go.Bar(x=[selectGraph["FIELD"],selectGraph["PROJECT"]], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
+    trace1 = go.Bar(x=[selectGraph["FIELD"],selectGraph["PROJECT"]], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
+    dataTrace = [trace0, trace1]
+    layoutTrace={'xaxis': {'title': 'Project'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
+    fig = go.Figure(data=dataTrace, layout=layoutTrace)
+    st.plotly_chart(fig)
+
+    # Graph 2a: Ranking of labour cost for project/Functional Group by S$ & Hr
+    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
+    selectGraph2.update_yaxes(categoryorder='sum ascending')
+    st.plotly_chart(selectGraph2)
+
+    selectGraph2 = px.bar(selectGraph, x='HOUR', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
+    selectGraph2.update_yaxes(categoryorder='sum ascending')
+    st.plotly_chart(selectGraph2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ################################################
 # Test set to see if ploty works
