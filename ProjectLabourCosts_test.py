@@ -31,7 +31,7 @@ import warnings
 
 # Load the processed output data into streamlit as data source
 DATA_URL = ("./data.csv")
-@st.cache
+@st.cache(ignore_hash=True)
 def load_data():
     data = pd.read_csv(DATA_URL)
     return data
@@ -69,6 +69,7 @@ if select == 'Functional Group':
     layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
     fig = go.Figure(data=dataTrace, layout=layoutTrace)
     st.plotly_chart(fig)
+# The above shown on streamlit deploying; so is the data.query does not works
 
 # Original code do not delete
 selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
