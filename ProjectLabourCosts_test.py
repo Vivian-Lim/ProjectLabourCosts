@@ -56,7 +56,7 @@ st.sidebar.subheader('View of data for selected month')
 selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
 if selectYr == '2019':
     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='1')
-    selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+    selectGraph = data.query('(YEAR==@selectYr) & (MONTH==@selectMth)') 
     selectGraph
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
@@ -141,15 +141,15 @@ else:
 #     abcd
 
 
-# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
-# if selectYr == '2019':
-#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
-#     vtest1 = dfee.query("YEAR==2019 & MONTH==@selectMth")
-#     vtest1
-# else: 
-#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'])
-#     vtest2 = dfee.query("YEAR==2020 & MONTH==@selectMth")
-#     vtest2
+selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
+if selectYr == '2019':
+    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
+    vtest1 = dfee.query("YEAR==2019 & MONTH==@selectMth")
+    vtest1
+else: 
+    selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'])
+    vtest2 = dfee.query("YEAR==2020 & MONTH==@selectMth")
+    vtest2
 
 
 ##############################################################
