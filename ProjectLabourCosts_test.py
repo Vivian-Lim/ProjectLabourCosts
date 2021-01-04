@@ -70,11 +70,11 @@ if select == 'Functional Group':
     st.plotly_chart(fig)
     
     # Graph 2b: Ranking of labour cost for project/Functional Group by S$ & Hr
-    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
+    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color=None, facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
    
-    selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
+    selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color=None, facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
 else:
