@@ -37,6 +37,8 @@ def load_data():
     return data
 data = load_data()
 data
+test1 = data.query('YEAR == 2020 & MONTH == 5')
+test1
 
 # Setting up streamlit by giving titles and description
 st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
