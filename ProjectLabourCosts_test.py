@@ -65,10 +65,10 @@ else:
     abcd
 
 
-selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
+selectYr = st.sidebar.selectbox('Year', [2019, 2020])
 if selectYr == '2019':
     # selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
-    vtest1 = dfee.query("YEAR==@minimum")
+    vtest1 = dfee.query("YEAR==@selectYr")
     vtest1
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'])
