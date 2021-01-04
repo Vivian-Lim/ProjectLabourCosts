@@ -12,6 +12,7 @@ import warnings
 
 # Define all data
 input = pd.read_csv('./tsInput.csv')
+input
 ref1 = pd.read_csv('./project_Ls.csv')
 ref2 = pd.read_csv('./staff_Lvl_Gp.csv')
 ref3 = pd.read_csv('./salary_Lvl.csv')
