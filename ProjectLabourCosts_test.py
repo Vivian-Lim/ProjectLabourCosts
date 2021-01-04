@@ -59,9 +59,9 @@ st.sidebar.subheader('View of data for selected month')
 # else: 
 #     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
 
-selectYr = '2020'
+# selectYr = '2020'
 
-
+################################################
 # Test set to see if ploty works
 selectGraph = data
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key=None)
@@ -78,6 +78,45 @@ if select == 'Functional Group':
 test1 = data.query('(YEAR == 2020) & (MONTH == 1)')
 test1
 
+# def get_data():
+#     url = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-09-12/visualisations/listings.csv"
+#     return pd.read_csv(url)
+# df = get_data()
+
+# minimum = st.sidebar.number_input("Minimum", min_value=0.0)
+# maximum = st.sidebar.number_input("Maximum", min_value=0.0, value=5.0)
+# if minimum > maximum:
+#     st.error("Please enter a valid range")
+# else:
+#     abcd = df.query("@minimum<=number_of_reviews<=@maximum")
+#     abcd
+
+
+
+def get_data():
+    url = "./data.csv"
+    return pd.read_csv(url)
+dfee = get_data()
+
+minimum = st.sidebar.number_input("Minimum", min_value=2019)
+maximum = st.sidebar.number_input("Maximum", min_value=2019, value=2020)
+if minimum > maximum:
+    st.error("Please enter a valid range")
+else:
+    abcd = dfee.query("@minimum<=YEAR<=@maximum")
+    abcd
+
+
+# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
+# if selectYr == '2019':
+#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='2')
+#     vtest = dfee.query("YEAR==@selectYr & MONTH==@selectMth")
+# else: 
+#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='3')
+#     vtest = dfee.query("YEAR==2020 & MONTH==@selectMth")
+
+
+##############################################################
 # Original code do not delete
 # selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
 # selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
