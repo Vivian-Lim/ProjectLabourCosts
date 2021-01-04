@@ -36,7 +36,6 @@ def load_data():
     data = pd.read_csv(DATA_URL)
     return data
 data = load_data()
-data
 
 # Setting up streamlit by giving titles and description
 st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
@@ -52,76 +51,15 @@ st.subheader('View of data for selected month')
 st.sidebar.title('Interactive control sidebar')
 st.sidebar.subheader('View of data for selected month')
 
-# Graph 1: labour costs in S$ and Hr by Project/Functional Group
-# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key=None)
-# if selectYr == '2019':
-#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key=None)
-# else: 
-#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
-
-# selectYr = '2020'
-
-################################################
-# Test set to see if ploty works
-selectGraph = data
-select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key=None)
-if select == 'Functional Group':
-    trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
-    trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
-    dataTrace = [trace0, trace1]
-    layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
-    fig = go.Figure(data=dataTrace, layout=layoutTrace)
-    st.plotly_chart(fig)
-# The above shown on streamlit deploying; so is the data.query does not works
-
-# Then test data query and it works with specified number
-test1 = data.query('(YEAR == 2020) & (MONTH == 1)')
-test1
-
-# def get_data():
-#     url = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-09-12/visualisations/listings.csv"
-#     return pd.read_csv(url)
-# df = get_data()
-
-# minimum = st.sidebar.number_input("Minimum", min_value=0.0)
-# maximum = st.sidebar.number_input("Maximum", min_value=0.0, value=5.0)
-# if minimum > maximum:
-#     st.error("Please enter a valid range")
-# else:
-#     abcd = df.query("@minimum<=number_of_reviews<=@maximum")
-#     abcd
 
 
-
-def get_data():
-    url = "./data.csv"
-    return pd.read_csv(url)
-dfee = get_data()
-
-minimum = st.sidebar.number_input("Minimum", min_value=2019)
-maximum = st.sidebar.number_input("Maximum", min_value=2019, value=2020)
-if minimum > maximum:
-    st.error("Please enter a valid range")
-else:
-    abcd = dfee.query("@minimum<=YEAR<=@maximum")
-    abcd
-
-
-# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
-# if selectYr == '2019':
-#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='2')
-#     vtest = dfee.query("YEAR==@selectYr & MONTH==@selectMth")
-# else: 
-#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='3')
-#     vtest = dfee.query("YEAR==2020 & MONTH==@selectMth")
-
-
-##############################################################
-# Original code do not delete
-# selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
-# selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
-selectGraph = data.query("YEAR == 2023") 
-selectGraph
+selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key='1')
+if selectYr == '2019':
+    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key='1')
+    selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+else: 
+    selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key='1')
+    selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
 
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
 if select == 'Functional Group':
@@ -133,11 +71,11 @@ if select == 'Functional Group':
     st.plotly_chart(fig)
     
     # Graph 2b: Ranking of labour cost for project/Functional Group by S$ & Hr
-    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color=None, facet_row=None, category_orders={}, labels={})
+    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
-   
-    selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color=None, facet_row=None, category_orders={}, labels={})
+
+    selectGraph2 = px.bar(selectGraph, x='HOUR', y='GROUP', color='PROJECT', facet_row=None, category_orders={}, labels={})
     selectGraph2.update_yaxes(categoryorder='sum ascending')
     st.plotly_chart(selectGraph2)
 else:
@@ -148,14 +86,73 @@ else:
     fig = go.Figure(data=dataTrace, layout=layoutTrace)
     st.plotly_chart(fig)
 
-    # Graph 2a: Ranking of labour cost for project/Functional Group by S$ & Hr
-    selectGraph2 = px.bar(selectGraph, x='SalaryCost', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
-    selectGraph2.update_yaxes(categoryorder='sum ascending')
-    st.plotly_chart(selectGraph2)
-   
-    selectGraph2 = px.bar(selectGraph, x='HOUR', y='PROJECT', color='GROUP', facet_row=None, category_orders={}, labels={})
-    selectGraph2.update_yaxes(categoryorder='sum ascending')
-    st.plotly_chart(selectGraph2)
+
+
+# Graph 1: labour costs in S$ and Hr by Project/Functional Group
+# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'], key=None)
+# if selectYr == '2019':
+#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'], key=None)
+# else: 
+#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
+
+# selectYr = '2020'
+
+################################################
+# Test set to see if ploty works
+# selectGraph = data
+# select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key=None)
+# if select == 'Functional Group':
+#     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
+#     trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
+#     dataTrace = [trace0, trace1]
+#     layoutTrace={'xaxis': {'title': 'Functional Group'},'yaxis': {'title': 'Salary Cost (S$)'}, 'yaxis2': {'title': 'Time Spent (Hr)', 'overlaying': 'y', 'side': 'right'}, 'height':550}
+#     fig = go.Figure(data=dataTrace, layout=layoutTrace)
+#     st.plotly_chart(fig)
+# The above shown on streamlit deploying; so is the data.query does not works
+
+# Then test data query and it works with specified number
+# test1 = data.query('(YEAR == 2020) & (MONTH == 1)')
+# test1
+
+# def get_data():
+#     url = "http://data.insideairbnb.com/united-states/ny/new-york-city/2019-09-12/visualisations/listings.csv"
+#     return pd.read_csv(url)
+# df = get_data()
+# minimum = st.sidebar.number_input("Minimum", min_value=0.0)
+# maximum = st.sidebar.number_input("Maximum", min_value=0.0, value=5.0)
+# if minimum > maximum:
+#     st.error("Please enter a valid range")
+# else:
+#     abcd = df.query("@minimum<=number_of_reviews<=@maximum")
+#     abcd
+
+
+# def get_data():
+#     url = "./data.csv"
+#     return pd.read_csv(url)
+# dfee = get_data()
+# minimum = st.sidebar.number_input("Minimum", min_value=2019)
+# maximum = st.sidebar.number_input("Maximum", min_value=2019, value=2020)
+# if minimum > maximum:
+#     st.error("Please enter a valid range")
+# else:
+#     abcd = dfee.query("@minimum<=YEAR<=@maximum")
+#     abcd
+
+
+# selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
+# if selectYr == '2019':
+#     selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
+#     vtest1 = dfee.query("YEAR==2019 & MONTH==@selectMth")
+#     vtest1
+# else: 
+#     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'])
+#     vtest2 = dfee.query("YEAR==2020 & MONTH==@selectMth")
+#     vtest2
+
+
+##############################################################
+# Original code do not delete
 
 
 # Hide/Show data table for the selected month
