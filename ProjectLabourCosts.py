@@ -11,23 +11,23 @@ import pmdarima as pm
 import warnings 
 
 # Define all data
-# input = pd.read_csv('./tsInput.csv')
-# ref1 = pd.read_csv('./project_Ls.csv')
-# ref2 = pd.read_csv('./staff_Lvl_Gp.csv')
-# ref3 = pd.read_csv('./salary_Lvl.csv')
+input = pd.read_csv('./tsInput.csv')
+ref1 = pd.read_csv('./project_Ls.csv')
+ref2 = pd.read_csv('./staff_Lvl_Gp.csv')
+ref3 = pd.read_csv('./salary_Lvl.csv')
 data = pd.read_csv('./data.csv')
 
-# # Merging master-input file with reference-file
-# input_ref1 = pd.merge(input, ref1, on='PROJECT', how='left')
-# input_ref1_2 = pd.merge(input_ref1, ref2, on='STAFF', how='left')
-# input_ref1_2_3 = pd.merge(input_ref1_2, ref3, on='LEVEL', how='left')
+# Merging master-input file with reference-file
+input_ref1 = pd.merge(input, ref1, on='PROJECT', how='left')
+input_ref1_2 = pd.merge(input_ref1, ref2, on='STAFF', how='left')
+input_ref1_2_3 = pd.merge(input_ref1_2, ref3, on='LEVEL', how='left')
 
-# # Adding new calculated column calculated to the merge-table
-# input_ref1_2_3['SalaryCost'] = input_ref1_2_3['HOUR'] * input_ref1_2_3['AVER HOURLY SALARY']
+# Adding new calculated column calculated to the merge-table
+input_ref1_2_3['SalaryCost'] = input_ref1_2_3['HOUR'] * input_ref1_2_3['AVER HOURLY SALARY']
 
-# # Output the .csv data file to a specific location
-# outputTable = pd.DataFrame(input_ref1_2_3)
-# outputTable.to_csv(data)
+# Output the .csv data file to a specific location
+outputTable = pd.DataFrame(input_ref1_2_3)
+outputTable.to_csv(data)
 
 # Load the processed output data into streamlit as data source
 DATA_URL = ("./data.csv")
@@ -36,6 +36,7 @@ def load_data():
     data = pd.read_csv(DATA_URL)
     return data
 data = load_data()
+data
 
 # Setting up streamlit by giving titles and description
 st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
