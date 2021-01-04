@@ -12,11 +12,10 @@ import warnings
 
 # Define all data
 input = pd.read_csv('./tsInput.csv')
-input
 ref1 = pd.read_csv('./project_Ls.csv')
 ref2 = pd.read_csv('./staff_Lvl_Gp.csv')
 ref3 = pd.read_csv('./salary_Lvl.csv')
-data = './data.csv'
+data = pd.read_csv('./data.csv')
 
 # Merging master-input file with reference-file
 input_ref1 = pd.merge(input, ref1, on='PROJECT', how='left')
