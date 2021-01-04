@@ -64,7 +64,7 @@ selectYr = '2020'
 
 # Test set to see if ploty works
 selectGraph = data
-select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
+select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key=None)
 if select == 'Functional Group':
     trace0 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["SalaryCost"], name='S$', xaxis='x', yaxis='y', offsetgroup=1)
     trace1 = go.Bar(x=selectGraph["GROUP"], y=selectGraph["HOUR"], name='Hr', yaxis='y2', offsetgroup=2)
@@ -81,7 +81,7 @@ test1
 # Original code do not delete
 # selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
 # selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
-selectGraph = data.query("YEAR == @selectYr") 
+selectGraph = data.query("YEAR == 2023") 
 selectGraph
 
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
