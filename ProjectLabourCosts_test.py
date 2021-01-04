@@ -67,8 +67,8 @@ else:
 
 selectYr = st.sidebar.selectbox('Year', ['2019', '2020'])
 if selectYr == '2019':
-    selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
-    vtest1 = dfee.query("YEAR==2019 & MONTH==@selectMth")
+    # selectMth = st.sidebar.selectbox('Month', ['8', '9', '10', '11', '12'])
+    vtest1 = dfee.query("YEAR==2019")
     vtest1
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'])
