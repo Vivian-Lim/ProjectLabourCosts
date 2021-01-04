@@ -59,6 +59,9 @@ if selectYr == '2019':
 else: 
     selectMth = st.sidebar.selectbox('Month', ['1', '2', '3', '4', '5'], key=None)
 
+selectYr = '2020'
+selectMth = '2'
+
 # Test set to see if ploty works
 selectGraph = data
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
@@ -76,8 +79,8 @@ test1 = data.query('(YEAR == 2020) & (MONTH == 1)')
 test1
 
 # Original code do not delete
-# selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
-selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
+selectGraph = data.query('(YEAR == @selectYr) & (MONTH == @selectMth)') 
+# selectGraph = data.query('(YEAR == 2020) & (MONTH == 4)') 
 selectGraph
 
 select = st.sidebar.selectbox('Sort by:', ['Functional Group', 'Project'], key='1')
