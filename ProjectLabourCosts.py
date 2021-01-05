@@ -38,7 +38,7 @@ def load_data():
 data = load_data()
 
 # Setting up streamlit by giving titles and description
-st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate the skills in python for data analysis and visualization.')
+st.write('###### REMARK: The analysis on this web app is based on mock datasets. This site is used by the owner as a means to practice and illustrate skills in python for data analysis and visualization. To access the control sidebar, click on the arrow icon on the top left corner.')
 st.title('Project labour costs')
 st.subheader('Scenario')
 st.write('A company named Color-Veg Pte. Ltd. would like to study the labour cost on projects. A timesheet system was created to collect time spent enter by each employee, grouped by functional group, for each project.')
